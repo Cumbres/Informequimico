@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe Caso Emergencia Química – Condominio Cumbres de Quilpué</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: #f4f7f6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #0056b3;
+            position: relative;
+        }
+
+        header h1 {
+            color: #0056b3;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        header p {
+            color: #555;
+            font-size: 1.1em;
+            font-weight: 300;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #e9f0f8;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.2);
+        }
+
+        .section h2 {
+            color: #007bff;
+            font-size: 1.8em;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .section h2 .icon {
+            font-size: 1.2em;
+            color: #007bff;
+            transition: transform 0.3s ease;
+        }
+
+        .section-content {
+            display: none;
+            padding-top: 15px;
+            border-top: 1px dashed #a7d0f0;
+        }
+
+        .section.active .section-content {
+            display: block;
+        }
+
+        .section.active h2 .icon {
+            transform: rotate(90deg);
+        }
+
+        .section h3 {
+            color: #0056b3;
+            font-size: 1.4em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            border-bottom: 1px dotted #a7d0f0;
+            padding-bottom: 5px;
+        }
+
+        .section ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .section ul li {
+            background: #d4e6f1;
+            margin-bottom: 8px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: flex;
+            align-items: flex-start;
+            font-size: 0.95em;
+        }
+
+        .section ul li:before {
+            content: '•';
+            color: #0056b3;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+            margin-right: 5px;
+        }
+
+        .section ol {
+            padding-left: 20px;
+        }
+
+        .section ol li {
+            margin-bottom: 10px;
+            font-size: 0.95em;
+        }
+
+        .highlight {
+            background-color: #fff3cd;
+            padding: 10px 15px;
+            border-left: 4px solid #ffc107;
+            margin-top: 20px;
+            border-radius: 5px;
+            color: #664d03;
+        }
+
+        .conclusion {
+            background-color: #d4edda;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 6px solid #28a745;
+            margin-top: 40px;
+        }
+
+        .conclusion h2 {
+            color: #28a745;
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .conclusion ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .conclusion ul li {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+        }
+
+        .conclusion ul li .check-icon {
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #777;
+            font-size: 0.9em;
+        }
+
+        .tooltip {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .section:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Informe Caso Emergencia Química – Condominio Cumbres de Quilpué</h1>
+            <p>Este informe detalla las acciones legales tomadas por el <strong>Comité de Administración del Condominio Cumbres de Quilpué</strong> tras una <strong>emergencia química</strong> originada en una de sus unidades habitacionales. La situación generó un gasto extraordinario superior a <strong>$6.000.000</strong>, monto que fue directamente facturado a la comunidad por una empresa especializada y debidamente imputado al gasto común del propietario responsable.</p>
+            <p>El objetivo es fundamentar jurídicamente el cobro realizado, analizar los hechos relevantes y ofrecer recomendaciones para la adecuada resolución de este caso.</p>
+        </header>
+
+        <div class="section" onclick="toggleSection(this)">
+            <h2>Normativa Legal <span class="icon">></span></h2>
+            <div class="section-content">
+                <p>El hecho de que el monto de <strong>$6.xxx.xxx</strong> corresponde únicamente al servicio químico profesional, cuyo cobro fue ejecutado y facturado directamente a la comunidad, y debida y legalmente cargado al gasto común del propietario responsable.</p>
+                <ul>
+                    <li><strong>Ley N° 21.442</strong> sobre Copropiedad Inmobiliaria, última versión (2025)</li>
+                    <li><strong>Código Civil chileno</strong> (arts. 2314 y 2320)</li>
+                    <li><strong>Reglamento Interno</strong> del Condominio Cumbres de Quilpué (2024)</li>
+                </ul>
+            </div>
+            <div class="tooltip">Haz clic para ver la normativa legal</div>
+        </div>
+
+        <div class="section" onclick="toggleSection(this)">
+            <h2>🔎 Análisis Jurídico Profesional <span class="icon">></span></h2>
+            <div class="section-content">
+                <h3>1. Contexto Legal Aplicable</h3>
+                <h4>A. Ley de Copropiedad Inmobiliaria N° 21.442</h4>
+                <ul>
+                    <li><strong>Art. 5 y 6:</strong> Todo copropietario es responsable por su unidad y debe cubrir las obligaciones económicas del condominio, incluyendo daños causados por arrendatarios. Estas obligaciones siguen al dueño, sin excepción, y son ejecutables incluso si el daño lo ocasiona un tercero bajo su dependencia.</li>
+                    <li><strong>Art. 20 N° 3 y N° 4:</strong> El administrador está legalmente facultado para ejecutar gastos urgentes, extraordinarios o imprevistos, como lo es una emergencia química, y proceder con su cobro al copropietario responsable.</li>
+                    <li><strong>Art. 6 y 7:</strong> Estos gastos se cargan al aviso de gasto común, con interés en caso de mora. El comité y administrador pueden celebrar convenios de pago con morosos previa autorización. Si no hay acuerdo, el cobro se puede ejecutar judicialmente por la vía ejecutiva.</li>
+                    <li><strong>Art. 20 N° 4 y 6:</strong> El administrador está facultado para emitir el cobro, representando legalmente al condominio en juicio para estos efectos.</li>
+                </ul>
+                <h4>B. Código Civil (Responsabilidad Extracontractual – Arts. 2314 y 2320)</h4>
+                <ul>
+                    <li><strong>Art. 2314:</strong> Todo aquel que cause daño a otro, ya sea por acción u omisión negligente, está obligado a repararlo.</li>
+                    <li><strong>Art. 2320:</strong> El propietario es responsable por los daños causados por personas bajo su dependencia o responsabilidad (arrendatarios).</li>
+                </ul>
+                <h4>C. Reglamento Interno del Condominio (CDQ, 2024)</h4>
+                <ul>
+                    <li><strong>Art. 10 y 12:</strong> El propietario es directamente responsable por cualquier daño provocado por arrendatarios o terceros relacionados a su unidad. Los gastos generados deben ser cargados a su unidad.</li>
+                    <li><strong>Art. 13 y 19:</strong> La emergencia química constituye una falta muy grave al poner en riesgo la seguridad de los residentes y la infraestructura. Habilita además la aplicación de multas adicionales.</li>
+                </ul>
+            </div>
+            <div class="tooltip">Haz clic para ver el análisis jurídico</div>
+        </div>
+
+        <div class="section" onclick="toggleSection(this)">
+            <h2>Hechos y Situación Actual <span class="icon">></span></h2>
+            <div class="section-content">
+                <p>El monto total de <strong>$6.xxx.xxx</strong> fue cobrado y ejecutado por la empresa especializada en limpieza química, la cual facturó directamente a la comunidad. Dado que el incidente fue causado desde una unidad, el comité procedió —conforme a ley— a cargar este gasto al gasto común del propietario responsable.</p>
+                <p>El cobro fue correctamente efectuado, registrado y comunicado. El procedimiento está legalmente validado según la Ley N° 21.442 y el Reglamento Interno.</p>
+                <div class="highlight">
+                    <p>No se ha cobrado ningún otro perjuicio colateral (daño eléctrico, daño moral, traslados, riesgo sanitario, afectación emocional, alojamiento o alimentación de familias), pese a que estos también ocurrieron y podrían eventualmente sumarse judicialmente.</p>
+                </div>
+                <p>Se ofrecieron tres alternativas de pago, todas rechazadas por la contraparte, sin propuesta concreta posterior.</p>
+            </div>
+            <div class="tooltip">Haz clic para ver los hechos y la situación actual</div>
+        </div>
+
+        <div class="section" onclick="toggleSection(this)">
+            <h2>Postura de la Contraparte <span class="icon">></span></h2>
+            <div class="section-content">
+                <p>El propietario no niega los hechos, pero ha intentado deslindar su responsabilidad indicando que el arrendatario actuó de forma independiente.</p>
+                <p>Sin embargo, según ley, el dueño de la unidad responde siempre por los daños generados desde su propiedad, sin importar si el autor directo fue un arrendatario, familiar o tercero.</p>
+                <p>Se alegó indefensión, pero constan múltiples instancias de contacto, reuniones y ofrecimientos. No hay registro de voluntad concreta de acuerdo.</p>
+                <p>El propietario ya había pagado una multa previa por comportamiento del mismo arrendatario ($197.703), lo que refuerza la conciencia previa de los riesgos.</p>
+            </div>
+            <div class="tooltip">Haz clic para ver la postura de la contraparte</div>
+        </div>
+
+        <div class="section" onclick="toggleSection(this)">
+            <h2>Fundamento Legal del Cobro y su Ejecución <span class="icon">></span></h2>
+            <div class="section-content">
+                <p>El cobro de <strong>$6.xxx.xxx</strong>:</p>
+                <ul>
+                    <li>✅ Se encuentra correctamente justificado, conforme al Art. 6 y 20 N° 3 de la Ley 21.442.</li>
+                    <li>✅ Fue incorporado legalmente al gasto común de la unidad afectada, respaldado por facturación externa y aprobado por el Comité.</li>
+                    <li>✅ Tiene carácter de gasto común extraordinario urgente, y como tal, es exigible judicialmente por la vía ejecutiva.</li>
+                    <li>✅ Está respaldado por el Reglamento Interno (Art. 12) y la normativa vigente sobre la responsabilidad de copropietarios por actos de sus arrendatarios.</li>
+                </ul>
+            </div>
+            <div class="tooltip">Haz clic para ver el fundamento legal del cobro</div>
+        </div>
+
+        <div class="section" onclick="toggleSection(this)">
+            <h2>Recomendaciones Estratégicas Finales <span class="icon">></span></h2>
+            <div class="section-content">
+                <ol>
+                    <li><strong>Mantener firme el cobro actual:</strong> Dado que está legalmente fundamentado y correctamente ejecutado, no es necesario volver a justificar el cargo ante la contraparte. El proceso ya está en curso.</li>
+                    <li><strong>Registrar formalmente todas las comunicaciones con la abogada del propietario:</strong> Esto permitirá documentar intentos de solución, respaldo de la buena fe del Comité, y construir una línea de tiempo ante un eventual juicio.</li>
+                    <li><strong>Emitir comunicado cuidadoso a la comunidad:</strong> Sin identificar a personas ni unidades, informar que:
+                        <ul>
+                            <li>Se utilizó el fondo de emergencia por una contingencia grave.</li>
+                            <li>El comité ya activó mecanismos de recuperación económica.</li>
+                            <li>Se actuó conforme a la ley y el reglamento.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Evaluar acción judicial complementaria:</strong> En caso de continuar la negativa, evaluar sumar a juicio:
+                        <ul>
+                            <li>Daños morales (vecinos afectados, funcionarios del comité).</li>
+                            <li>Gastos colaterales (alojamiento, alimentos, reparaciones).</li>
+                            <li>Multas reglamentarias por falta grave.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+            <div class="tooltip">Haz clic para ver las recomendaciones estratégicas</div>
+        </div>
+
+        <div class="conclusion">
+            <h2>✅ Conclusión Final</h2>
+            <p>El Comité de Administración del Condominio Cumbres de Quilpué ha actuado dentro del marco legal, conforme a:</p>
+            <ul>
+                <li><span class="check-icon">✔</span> <strong>Ley N° 21.442</strong>, artículos 5, 6, 7, 20 y 33</li>
+                <li><span class="check-icon">✔</span> <strong>Código Civil</strong>, artículos 2314 y 2320</li>
+                <li><span class="check-icon">✔</span> <strong>Reglamento Interno</strong> del condominio</li>
+            </ul>
+            <p>El cobro efectuado al copropietario es válido, ejecutable y legalmente respaldado, y podrá ser defendido judicialmente en su integridad, incluso ampliado si se incorporan daños adicionales.</p>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Condominio Cumbres de Quilpué. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleSection(element) {
+            element.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
